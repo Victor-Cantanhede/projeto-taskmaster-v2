@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
 import './FormLogin.css';
 
@@ -5,19 +6,29 @@ function FormLogin() {
 
     const userRef = useRef();
     const passwordRef = useRef();
+    const navigate = useNavigate();
 
+    // SENHA PADRÃO
     const MasterPassword = 'master';
 
+    // VALIDANDO ACESSO
     function LoginValidate(event) {
         event.preventDefault();
         console.log('Validando acesso...');
         
         const newUserRef = userRef.current.value.toLowerCase();
-        const newPasswordRef = userRef.current.value.toLowerCase();
+        const newPasswordRef = passwordRef.current.value.toLowerCase();
 
         if ((newUserRef && newPasswordRef) == MasterPassword) {
             console.log('Acesso autorizado!');
             console.log('Redirecionando usuário...');
+            navigate('/Home'); // REDIRECIONANDO PARA A PÁGINA HOME
+
+        } else {
+            console.log('Acesso não autorizado!');
+            window.alert('Acesso negado! Utilize o acesso Master.');
+            userRef.current.value = '';
+            passwordRef.current.value = '';
         }
     }
 

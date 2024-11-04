@@ -1,18 +1,27 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import FormLogin from './components/FormLogin/FormLogin';
+import Home from './pages/Home/Home';
 import './App.css';
 
 function App() {
 
   return (
-    <div className='appBody'>
-      <div className='containerHeader'>
-        <h1>Login</h1>
-        <h1>Task Master</h1>
-      </div>
-      <div className='gc-001'>
-        <FormLogin />
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={
+          <div className='appBody'>
+            <div className='containerHeader'>
+              <h1>Login</h1>
+              <h1>Task Master</h1>
+            </div>
+            <div className='gc-001'>
+              <FormLogin />
+            </div>
+          </div>
+        } />
+        <Route path="/Home" element={<Home />} />
+      </Routes>
+    </Router>
   )
 }
 
