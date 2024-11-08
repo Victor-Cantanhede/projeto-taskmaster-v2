@@ -267,6 +267,10 @@ li {
     background-color: rgba(255, 0, 0, 0.623);
 }
 
+#btnSalvarAlteracoes {
+    background-color: rgb(255, 165, 0, 0.850);
+}
+
 .btnActionsDemanda button:hover {
     opacity: 1;
 }
