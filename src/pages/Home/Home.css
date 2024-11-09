@@ -12,9 +12,9 @@
     padding: 10px;
 
     color: white;
-    background-color: transparent;
-    backdrop-filter: blur(10px);
+    background-color: rgba(7, 25, 65, 0.966);
     box-shadow: 1px 0 10px rgba(0, 0, 0, 0.616);
+    z-index: 9999;
 }
 
 @media screen and (max-width: 1020px) {
@@ -108,6 +108,8 @@ li {
     padding: 20px;
     padding-top: 0;
     flex-grow: 1;
+
+    background-color: #f4f4f4;
 }
 
 @media screen and (max-width: 1020px) {
@@ -123,30 +125,52 @@ li {
     min-height: max-content;
 
     border-radius: 10px;
-    background-color: transparent;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.247);
     overflow: hidden;
+
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 20px;
 }
 
 .FormCadTask-cabecalho {
     padding: 10px;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.555);
-    text-align: center;
+    color: rgba(0, 0, 0, 0.76);
+    text-shadow: none;
+    text-align: left;
+
+    border-bottom: 1px solid rgba(128, 128, 128, 0.185);
+}
+
+.FormCadTaks-PreviewDemandas {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+@media screen and (max-width: 1062px) {
+    .FormCadTaks-PreviewDemandas {
+        flex-flow: column nowrap;
+    }
 }
 
 .ContainerFormCad {
     width: 100%;
-    max-width: 700px;
-    margin: auto;
-    margin-top: 20px;
     padding: 10px;
 
-    color: white;
+    display: flex;
+    justify-content: center;
+
+    color: rgba(0, 0, 0, 0.76);
+    text-shadow: none;
+}
+
+@media screen and (max-width: 400px) {
+    .ContainerFormCad {
+        min-width: 100%;
+    }
 }
 
 .ContainerFormCad form {
+    width: 100%;
     padding: 10px;
     border-radius: 10px;
     border: 1px solid rgba(128, 128, 128, 0.185);
@@ -172,13 +196,18 @@ li {
 
     font-size: 1em;
     border-radius: 5px;
-    color: rgba(255, 255, 255, 0.767);
-    background-color: rgba(0, 0, 0, 0.295);
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.247);
+    border: 1px solid rgba(128, 128, 128, 0.185);
+    color: black;
+    background-color: transparent;
+}
+
+.InputContainerForm input:focus, .InputContainerForm textarea:focus, .InputContainerForm select:focus {
+    border: 1px solid rgb(30, 104, 216, 0.623);
 }
 
 .InputContainerForm textarea {
     min-height: 75px;
+    resize: vertical;
 }
 
 .btnContainerForm {
@@ -192,7 +221,7 @@ li {
     font-size: 1em;
     color: white;
     text-shadow: 0 0 3px rgba(0, 0, 0, 0.774);
-    background-color: rgb(30, 104, 216);
+    background-color: rgb(14, 55, 145);
     border-radius: 10px;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.37);
     cursor: pointer;
@@ -216,11 +245,12 @@ li {
 .ContainerPreviewDemandas {
     width: 100%;
     max-width: 700px;
-    margin: auto;
     padding: 10px;
 }
 
 .PreviewDemandas {
+    width: 362px;
+    max-width: 362px;
     padding: 10px;
     border-radius: 10px;
     border: 1px solid rgba(128, 128, 128, 0.185);
@@ -230,17 +260,35 @@ li {
     gap: 5px;
 }
 
+@media screen and (max-width: 1062px) {
+    .ContainerPreviewDemandas {
+        max-width: 100%;
+    }
+
+    .PreviewDemandas {
+        min-width: 100%;
+        max-width: 100%;
+    }
+}
+
 .DemandaCadastrada {
     padding: 10px;
 
-    color: white;
+    color: rgba(0, 0, 0, 0.76);
+    text-shadow: none;
 }
 
 .btnActionsDemanda {
     margin-top: 10px;
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     gap: 10px;
+}
+
+@media screen and (max-width: 400px) {
+    .btnActionsDemanda {
+        flex-flow: column nowrap;
+    }
 }
 
 .btnActionsDemanda button {
@@ -257,6 +305,12 @@ li {
     opacity: 0.8;
 
     transition: 0.4s;
+}
+
+@media screen and (max-width: 400px) {
+    .btnActionsDemanda button {
+        width: 100%;
+    }
 }
 
 #btnConcluir {

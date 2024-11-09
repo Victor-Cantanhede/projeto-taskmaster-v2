@@ -154,12 +154,12 @@ function Home() {
         if (Demandas.emAlteracao == false) {
             return (
                 <>
-                    <p>Título: {Demandas.titulo}</p>
-                    <p>Categoria: {Demandas.categoria}</p>
-                    <p>Descrição: {Demandas.descricao}</p>
+                    <p><strong>Título:</strong> {Demandas.titulo}</p>
+                    <p><strong>Categoria:</strong> {Demandas.categoria}</p>
+                    <p><strong>Descrição:</strong> {Demandas.descricao}</p>
                     <br />
-                    <p>Data de Inclusão: {Demandas.dataInclusao}</p>
-                    <p>Prazo: {Demandas.prazo} {Demandas.diasParaEntrega}</p>
+                    <p><strong>Data de Inclusão:</strong> {Demandas.dataInclusao}</p>
+                    <p><strong>Prazo:</strong> {Demandas.prazo} {Demandas.diasParaEntrega}</p>
                 </>
             );
 
@@ -211,75 +211,79 @@ function Home() {
                     <div className='FormCadTask-cabecalho'>
                         <h1>Cadastro de demandas</h1>
                     </div>
-                    <div className='ContainerFormCad'>
+                    <div className='FormCadTaks-PreviewDemandas'>
+                        <div className='ContainerFormCad'>
 
-                        {/* FORM PARA CADASTRO DE DEMANDAS */}
-                        <form action="" method="post" autoComplete='off' onSubmit={CadastrarTask} >
+                            {/* FORM PARA CADASTRO DE DEMANDAS */}
+                            <form action="" method="post" autoComplete='off' onSubmit={CadastrarTask} >
 
-                            {/* INPUT TÍTULO */}
-                            <div className='InputContainerForm'>
-                                <label htmlFor="ititulo">Título:</label>
-                                <input type="text" name="titulo" id="ititulo" placeholder='Digite o título da tarefa...' ref={tituloRef} />
-                            </div>
+                                {/* INPUT TÍTULO */}
+                                <div className='InputContainerForm'>
+                                    <label htmlFor="ititulo">Título:</label>
+                                    <input type="text" name="titulo" id="ititulo" placeholder='Digite o título da tarefa...' ref={tituloRef} />
+                                </div>
 
-                            {/* INPUT DESCRIÇÃO */}
-                            <div className='InputContainerForm'>
-                                <label htmlFor="idescricao">Descrição:</label>
-                                <textarea name="descricao" id="idescricao" placeholder='Digite a descrição da tarefa...' ref={descricaoRef} />
-                            </div>
-                            
-                            {/* INPUT CATEGORIA */}
-                            <div className='InputContainerForm'>
-                                <label htmlFor="icategoria">Categoria:</label>
-                                <select name="categoria" id="icategoria" defaultValue={""} ref={categoriaRef} >
-                                    <option value="" disabled hidden >Selecione uma categoria</option>
-                                    <option value="Trabalho">Trabalho</option>
-                                    <option value="Estudos">Estudos</option>
-                                    <option value="Pessoal">Pessoal</option>
-                                </select>
-                            </div>
+                                {/* INPUT DESCRIÇÃO */}
+                                <div className='InputContainerForm'>
+                                    <label htmlFor="idescricao">Descrição:</label>
+                                    <textarea name="descricao" id="idescricao" placeholder='Digite a descrição da tarefa...' ref={descricaoRef} />
+                                </div>
+                        
+                                {/* INPUT CATEGORIA */}
+                                <div className='InputContainerForm'>
+                                    <label htmlFor="icategoria">Categoria:</label>
+                                    <select name="categoria" id="icategoria" defaultValue={""} ref={categoriaRef} >
+                                        <option value="" disabled hidden >Selecione uma categoria</option>
+                                        <option value="Trabalho">Trabalho</option>
+                                        <option value="Estudos">Estudos</option>
+                                        <option value="Pessoal">Pessoal</option>
+                                    </select>
+                                </div>
 
-                            {/* INPUT PRAZO */}
-                            <div className='InputContainerForm'>
-                                <label htmlFor="iprazo">Prazo de entrega:</label>
-                                <input type="date" name="prazo" id="iprazo" ref={prazoRef} />
-                            </div>
+                                {/* INPUT PRAZO */}
+                                <div className='InputContainerForm'>
+                                    <label htmlFor="iprazo">Prazo de entrega:</label>
+                                    <input type="date" name="prazo" id="iprazo" ref={prazoRef} />
+                                </div>
 
-                            {/* BUTTON CADASTRAR */}
-                            <div className='btnContainerForm'>
-                                <button type='submit'>Cadastrar</button>
-                            </div>
-                        </form>
-                    </div>
+                                {/* BUTTON CADASTRAR */}
+                                <div className='btnContainerForm'>
+                                    <button type='submit'>Cadastrar</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div>
+                            {Demandas.map((Demandas) => (
 
-                    {Demandas.map((Demandas) => (
+                                /* PREVIEW DEMANDAS CADASTRADAS */
+                                <div className='ContainerPreviewDemandas' key={Demandas.id}>
+                                    <div className='PreviewDemandas' style={{backgroundColor: Demandas.isCompleted ? 'rgba(0, 255, 0, 0.171)' : 'initial', border: Demandas.emAlteracao ? '1px solid rgb(30, 104, 216, 0.623)' : '1px solid rgba(128, 128, 128, 0.185)', transition: '0.3s'}}>
+                                        <div className='DemandaCadastrada'>
 
-                        /* PREVIEW DEMANDAS CADASTRADAS */
-                        <div className='ContainerPreviewDemandas' key={Demandas.id}>
-                            <div className='PreviewDemandas' style={{backgroundColor: Demandas.isCompleted ? 'rgba(0, 128, 0, 0.267)' : 'initial', border: Demandas.emAlteracao ? '1px solid white' : '1px solid rgba(128, 128, 128, 0.185)', transition: '0.3s'}}>
-                                <div className='DemandaCadastrada'>
+                                            {/* INFORMAÇÕES DA DEMANDA (QUE PODEM SER ALTERADAS CLICANDO NO BTN EDITAR) */}
+                                            <AlterarDemanda Demandas={Demandas} />
+                                            
+                                            <div className='btnActionsDemanda'>
 
-                                    {/* INFORMAÇÕES DA DEMANDA (QUE PODEM SER ALTERADAS CLICANDO NO BTN EDITAR) */}
-                                    <AlterarDemanda Demandas={Demandas} />
+                                                {/* BTN CONCLUIR */}
+                                                <button id='btnConcluir' style={{display: Demandas.emAlteracao ? 'none' : 'block', backgroundColor: Demandas.isCompleted ? 'rgb(14, 55, 145)' : 'rgb(0, 128, 0, 0.623)'}} onClick={() => ConcluirTask(Demandas.id, Demandas.isCompleted)}>{Demandas.isCompleted ? 'Reabrir' : 'Concluir'}</button>
 
-                                    <div className='btnActionsDemanda'>
+                                                {/* BTN SALVAR ALTERAÇÕES (APÓS CLICAR NO BTN EDITAR) */}
+                                                <button id='btnSalvarAlteracoes' style={{display: Demandas.emAlteracao ? 'block' : 'none'}} onClick={() => SalvarAlteracoes(Demandas.id)}>Salvar</button>
 
-                                        {/* BTN CONCLUIR */}
-                                        <button id='btnConcluir' style={{display: Demandas.emAlteracao ? 'none' : 'block', backgroundColor: Demandas.isCompleted ? 'rgb(30, 104, 216, 0.623)' : 'rgb(0, 128, 0, 0.623)'}} onClick={() => ConcluirTask(Demandas.id, Demandas.isCompleted)}>{Demandas.isCompleted ? 'Reabrir' : 'Concluir'}</button>
-
-                                        {/* BTN SALVAR ALTERAÇÕES (APÓS CLICAR NO BTN EDITAR) */}
-                                        <button id='btnSalvarAlteracoes' style={{display: Demandas.emAlteracao ? 'block' : 'none'}} onClick={() => SalvarAlteracoes(Demandas.id)}>Salvar</button>
-
-                                        {/* BTN EDITAR */}
-                                        <button id='btnEditar' style={{display: Demandas.isCompleted ? 'none' : 'block', backgroundColor: Demandas.emAlteracao ? 'rgba(255, 0, 0, 0.623)' : 'rgb(30, 104, 216, 0.623)'}} onClick={() => EditarDemanda(Demandas.id, Demandas.emAlteracao)}>{Demandas.emAlteracao ? 'Cancelar' : 'Editar'}</button>
-
-                                        {/* BTN EXCLUIR */}
-                                        <button id='btnExcluir' style={{display: Demandas.emAlteracao ? 'none' : 'block'}} onClick={() => ExcluirTask(Demandas.id)}>{Demandas.isCompleted ? 'Arquivar' : 'Excluir'}</button>
+                                                {/* BTN EDITAR */}
+                                                <button id='btnEditar' style={{display: Demandas.isCompleted ? 'none' : 'block', backgroundColor: Demandas.emAlteracao ? 'rgba(255, 0, 0, 0.623)' : 'rgb(14, 55, 145)'}} onClick={() => EditarDemanda(Demandas.id, Demandas.emAlteracao)}>{Demandas.emAlteracao ? 'Cancelar' : 'Editar'}</button>
+                                                
+                                                {/* BTN EXCLUIR */}
+                                                <button id='btnExcluir' style={{display: Demandas.emAlteracao ? 'none' : 'block'}} onClick={() => ExcluirTask(Demandas.id)}>{Demandas.isCompleted ? 'Arquivar' : 'Excluir'}</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            ))}
                         </div>
-                    ))}
+                    </div>
+
                 </div>
             </div>
         </div>
