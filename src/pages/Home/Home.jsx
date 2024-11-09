@@ -1,5 +1,7 @@
 import { useRef, useState } from 'react';
 import { v4 } from 'uuid';
+import SideMenu from '../../components/SideMenu/SideMenu';
+import { EditSquareIco, CheckIco, DoneIco, DeleteIco, ArchiveIco, SaveIco, CancelIco } from '../../components/Icons';
 import './Home.css';
 
 function Home() {
@@ -192,20 +194,7 @@ function Home() {
 
     return (
         <div className='homeContainer'>
-            <div className='SideMenuContainer'>
-                <div className='ShowMenu'>
-                    <h1>Menu</h1>
-                    <span className='IconButton'><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></span>
-                </div>
-                <nav className='ContainerMenuOption'>
-                    <ul>
-                        <li><span>Cadastro</span></li>
-                        <li><span>Consulta</span></li>
-                        <li><span>Relatório</span></li>
-                        <li><span>Ajuda</span></li>
-                    </ul>
-                </nav>
-            </div>
+            <SideMenu />
             <div className='GerenciadorMainContainer'>
                 <div className='FormCadTask'>
                     <div className='FormCadTask-cabecalho'>
@@ -257,7 +246,7 @@ function Home() {
 
                                 /* PREVIEW DEMANDAS CADASTRADAS */
                                 <div className='ContainerPreviewDemandas' key={Demandas.id}>
-                                    <div className='PreviewDemandas' style={{backgroundColor: Demandas.isCompleted ? 'rgba(0, 255, 0, 0.171)' : 'initial', border: Demandas.emAlteracao ? '1px solid rgb(30, 104, 216, 0.623)' : '1px solid rgba(128, 128, 128, 0.185)', transition: '0.3s'}}>
+                                    <div className='PreviewDemandas' style={{opacity: Demandas.isCompleted ? '0.8' : '1', backgroundColor: Demandas.isCompleted ? 'rgba(0, 255, 0, 0.171)' : 'initial', border: Demandas.emAlteracao ? '1px solid rgb(30, 104, 216, 0.623)' : '1px solid rgba(128, 128, 128, 0.185)', transition: '0.3s'}}>
                                         <div className='DemandaCadastrada'>
 
                                             {/* INFORMAÇÕES DA DEMANDA (QUE PODEM SER ALTERADAS CLICANDO NO BTN EDITAR) */}
@@ -266,16 +255,16 @@ function Home() {
                                             <div className='btnActionsDemanda'>
 
                                                 {/* BTN CONCLUIR */}
-                                                <button id='btnConcluir' style={{display: Demandas.emAlteracao ? 'none' : 'block', backgroundColor: Demandas.isCompleted ? 'rgb(14, 55, 145)' : 'rgb(0, 128, 0, 0.623)'}} onClick={() => ConcluirTask(Demandas.id, Demandas.isCompleted)}>{Demandas.isCompleted ? 'Reabrir' : 'Concluir'}</button>
+                                                <button title={Demandas.isCompleted ? 'Reabrir' : 'Concluir'} id='btnConcluir' style={{display: Demandas.emAlteracao ? 'none' : 'block'}} onClick={() => ConcluirTask(Demandas.id, Demandas.isCompleted)}>{Demandas.isCompleted ? <DoneIco /> : <CheckIco />}</button>
 
                                                 {/* BTN SALVAR ALTERAÇÕES (APÓS CLICAR NO BTN EDITAR) */}
-                                                <button id='btnSalvarAlteracoes' style={{display: Demandas.emAlteracao ? 'block' : 'none'}} onClick={() => SalvarAlteracoes(Demandas.id)}>Salvar</button>
+                                                <button title='Salvar' id='btnSalvarAlteracoes' style={{display: Demandas.emAlteracao ? 'block' : 'none'}} onClick={() => SalvarAlteracoes(Demandas.id)}><SaveIco /></button>
 
                                                 {/* BTN EDITAR */}
-                                                <button id='btnEditar' style={{display: Demandas.isCompleted ? 'none' : 'block', backgroundColor: Demandas.emAlteracao ? 'rgba(255, 0, 0, 0.623)' : 'rgb(14, 55, 145)'}} onClick={() => EditarDemanda(Demandas.id, Demandas.emAlteracao)}>{Demandas.emAlteracao ? 'Cancelar' : 'Editar'}</button>
-                                                
+                                                <button title={Demandas.emAlteracao ? 'Cancelar alteração' : 'Editar'} id='btnEditar' style={{display: Demandas.isCompleted ? 'none' : 'block', backgroundColor: Demandas.emAlteracao ? 'rgba(255, 0, 0, 0.623)' : 'rgb(14, 55, 145)'}} onClick={() => EditarDemanda(Demandas.id, Demandas.emAlteracao)}>{Demandas.emAlteracao ? <CancelIco /> : <EditSquareIco />}</button>
+
                                                 {/* BTN EXCLUIR */}
-                                                <button id='btnExcluir' style={{display: Demandas.emAlteracao ? 'none' : 'block'}} onClick={() => ExcluirTask(Demandas.id)}>{Demandas.isCompleted ? 'Arquivar' : 'Excluir'}</button>
+                                                <button title={Demandas.isCompleted ? 'Arquivar' : 'Excluir'} id='btnExcluir' style={{display: Demandas.emAlteracao ? 'none' : 'block'}} onClick={() => ExcluirTask(Demandas.id)}>{Demandas.isCompleted ? <ArchiveIco /> : <DeleteIco />}</button>
                                             </div>
                                         </div>
                                     </div>

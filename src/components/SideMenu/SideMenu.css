@@ -1,0 +1,95 @@
+.SideMenuContainer {
+    min-height: 100%;
+    width: 260px;
+    padding: 10px;
+
+    color: white;
+    background-color: rgba(7, 25, 65, 0.966);
+    box-shadow: 1px 0 10px rgba(0, 0, 0, 0.616);
+    z-index: 9999;
+}
+
+@media screen and (max-width: 1020px) {
+    .SideMenuContainer {
+        height: max-content;
+        min-height: max-content;
+        width: 100%;
+    }
+}
+
+.ShowMenu {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+.IconButton {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.IconButton:hover {
+    background-color: rgba(255, 255, 255, 0.096);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.247);
+    
+    transition: 0.2s;
+}
+
+.ContainerMenuOption {
+    margin-top: 20px;
+}
+
+.ContainerMenuOption ul {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 20px;
+}
+
+li {
+    list-style: none;
+}
+
+@media screen and (max-width: 600px) {
+    .ContainerMenuOption ul {
+        align-items: center;
+    }
+
+    .ContainerMenuOption li {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.ContainerMenuOption li {
+    padding: 10px;
+    border-radius: 10px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.185);
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.ContainerMenuOption li:hover {
+    background-color: rgba(255, 255, 255, 0.096);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.247);
+
+    transition: 0.2s;
+}
+
+.ContainerMenuOption li span {
+    transition: 0.2s;
+}
+
+.ContainerMenuOption li:hover span {
+    padding-left: 5px;
+    transition: 0.2s;
+}
