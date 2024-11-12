@@ -1,7 +1,9 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { v4 } from 'uuid';
 import SideMenu from '../../components/SideMenu/SideMenu';
 import { EditSquareIco, CheckIco, DoneIco, DeleteIco, ArchiveIco, SaveIco, CancelIco } from '../../components/Icons';
+import { OrbitProgress } from 'react-loading-indicators';
+import { Checkmark } from 'react-checkmark';
 import './Home.css';
 
 function Home() {
@@ -16,11 +18,13 @@ function Home() {
     const newCategoriaRef = useRef();
     
     const [Demandas, setDemandas] = useState([]);
+    const [cadDemandasLoading, setCadDemandasLoading] = useState(false);
 
     // CADASTRANDO A DEMANDA
     function CadastrarTask(event) {
         event.preventDefault();
         
+        // VARIÁVEIS DE FÁCIL ACESSO AOS VALORES DOS INPUTS
         const titulo = tituloRef.current.value.toUpperCase();
         const descricao = descricaoRef.current.value;
         const categoria = categoriaRef.current.value;
@@ -47,28 +51,66 @@ function Home() {
         console.log('Cadastrando a demanda...');
 
         // ALTERANDO O ESTADO DO ARRAY DEMANDAS
-        setDemandas((Demandas) => ([...Demandas, {
-            id: v4(),
-            titulo: titulo,
-            descricao: descricao,
-            categoria: categoria,
-            dataInclusao: formatDate(dataInclusao),
-            prazo: formatDate(prazo),
-            diasParaEntrega: calcularDiferencaDias(dataInclusao, prazo),
-            emAlteracao: false,
-            isCompleted: false
-        }]));
+        setDemandas((Demandas) => ([
+            {
+                id: v4(),
+                titulo: titulo,
+                descricao: descricao,
+                categoria: categoria,
+                dataInclusao: formatDate(dataInclusao),
+                prazo: formatDate(prazo),
+                diasParaEntrega: calcularDiferencaDias(dataInclusao, prazo),
+                emAlteracao: false,
+                isCompleted: false,
+                inPreview: false
+            },
+            ...Demandas
+        ]));
 
         // ZERANDO VALORES DOS INPUTS
         tituloRef.current.value = '';
         descricaoRef.current.value = '';
         categoriaRef.current.value = '';
         prazoRef.current.value = '';
-
+        
         console.log('Cadastro realizado com sucesso!');
     }
 
-    // CONCLUINDO A DEMANDA
+    // ANIMAÇÃO DE INCLUIR DEMANDA NA TELA PREVIEW APÓS SEU CADASTRAMENTO
+    function incluDemandaAnimation(id) {
+        setDemandas((Demandas) =>
+            Demandas.map((Demandas) =>
+                Demandas.id === id ? { ...Demandas, inPreview: true } : Demandas
+            ));
+    }
+
+    // CHAMANDO ANIMAÇÃO QUANDO NOVA DEMANDA É CADASTRADA
+    useEffect(() => {
+        Demandas.forEach((Demandas) => {
+            if (!Demandas.inPreview) {
+                setCadDemandasLoading(true);
+                setTimeout(() => {
+                    incluDemandaAnimation(Demandas.id);
+                    setCadDemandasLoading(false);
+                }, 2000);
+            }
+        });
+    }, [Demandas]);
+
+    // ANIMAÇÃO DE LOADING
+    function CheckLoading() {
+        if (cadDemandasLoading) {
+            return (<OrbitProgress color='rgb(14, 55, 145)' style={{fontSize: '5px'}} />);
+
+        } else if (Demandas == '') {
+            return;
+
+        } else {
+            return (<span className='check'><Checkmark size='25px' /></span>);
+        }
+    }
+
+    // CONCLUINDO OU REABRINDO A DEMANDA
     function ConcluirTask(id, concluida) {
         if (concluida == false) {
             console.log('Concluindo demanda...');
@@ -238,14 +280,15 @@ function Home() {
                                 {/* BUTTON CADASTRAR */}
                                 <div className='btnContainerForm'>
                                     <button type='submit'>Cadastrar</button>
+                                    <CheckLoading />
                                 </div>
                             </form>
                         </div>
                         <div>
                             {Demandas.map((Demandas) => (
 
-                                /* PREVIEW DEMANDAS CADASTRADAS */
-                                <div className='ContainerPreviewDemandas' key={Demandas.id}>
+                                // PREVIEW DEMANDAS CADASTRADAS
+                                <div className={Demandas.inPreview ? 'ContainerPreviewDemandasAnimation' : 'ContainerPreviewDemandas'} key={Demandas.id}>
                                     <div className='PreviewDemandas' style={{opacity: Demandas.isCompleted ? '0.8' : '1', backgroundColor: Demandas.isCompleted ? 'rgba(0, 255, 0, 0.171)' : 'initial', border: Demandas.emAlteracao ? '1px solid rgb(30, 104, 216, 0.623)' : '1px solid rgba(128, 128, 128, 0.185)', transition: '0.3s'}}>
                                         <div className='DemandaCadastrada'>
 

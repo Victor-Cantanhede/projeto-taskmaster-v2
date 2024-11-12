@@ -116,6 +116,10 @@
 
 .btnContainerForm {
     padding: 10px;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    gap: 10px;
 }
 
 .btnContainerForm button {
@@ -147,9 +151,26 @@
 /*##################################################################*/
 
 .ContainerPreviewDemandas {
+    height: 0px;
+    width: 100%;
+    max-width: 700px;
+    padding: 0 10px 0 10px;
+
+    overflow: hidden;
+    opacity: 0;
+    transition: 2s;
+}
+
+.ContainerPreviewDemandasAnimation {
+    height: 900px;
+    max-height: max-content;
     width: 100%;
     max-width: 700px;
     padding: 10px;
+
+    overflow: hidden;
+    opacity: 1;
+    transition: 2s;
 }
 
 .PreviewDemandas {
@@ -162,6 +183,7 @@
     display: flex;
     flex-flow: column nowrap;
     gap: 5px;
+    overflow: hidden;
 }
 
 @media screen and (max-width: 1062px) {
@@ -237,4 +259,14 @@
 .btnActionsDemanda button:hover {
     opacity: 1;
     transform: translateY(-1px);
+}
+
+.check, .check * {
+    margin: 0;
+    animation: out 8s ease-in-out forwards;
+}
+
+@keyframes out {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
 }
