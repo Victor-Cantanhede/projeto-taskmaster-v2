@@ -18,6 +18,7 @@ function Home() {
     const newCategoriaRef = useRef();
     
     const [Demandas, setDemandas] = useState([]);
+    const [newCad, setNewCad] = useState(false);
     const [cadDemandasLoading, setCadDemandasLoading] = useState(false);
 
     // CADASTRANDO A DEMANDA
@@ -50,7 +51,7 @@ function Home() {
 
         console.log('Cadastrando a demanda...');
 
-        // ALTERANDO O ESTADO DO ARRAY DEMANDAS
+        // ALTERANDO O ESTADO DO ARRAY DEMANDAS (ADICIONANDO DEMANDA COMO NOVO OBJ)
         setDemandas((Demandas) => ([
             {
                 id: v4(),
@@ -62,7 +63,8 @@ function Home() {
                 diasParaEntrega: calcularDiferencaDias(dataInclusao, prazo),
                 emAlteracao: false,
                 isCompleted: false,
-                inPreview: false
+                inPreview: false,
+                isDeleted: false
             },
             ...Demandas
         ]));
@@ -72,7 +74,13 @@ function Home() {
         descricaoRef.current.value = '';
         categoriaRef.current.value = '';
         prazoRef.current.value = '';
-        
+
+        // ALTERANDO ESTADO DE NEWCAD PARA QUE A ANIMAÇÃO DE LOADING CHECK SEJA APENAS NO CADASTRAMENTO
+        setNewCad(true);
+        setTimeout(() => {
+            setNewCad(false);
+        }, 8000);
+
         console.log('Cadastro realizado com sucesso!');
     }
 
@@ -97,12 +105,12 @@ function Home() {
         });
     }, [Demandas]);
 
-    // ANIMAÇÃO DE LOADING
+    // ANIMAÇÃO DE LOADING E CHECK QUANDO NOVA DEMANDA É CADASTRADA
     function CheckLoading() {
         if (cadDemandasLoading) {
             return (<OrbitProgress color='rgb(14, 55, 145)' style={{fontSize: '5px'}} />);
 
-        } else if (Demandas == '') {
+        } else if (!newCad) {
             return;
 
         } else {
@@ -112,6 +120,10 @@ function Home() {
 
     // CONCLUINDO OU REABRINDO A DEMANDA
     function ConcluirTask(id, concluida) {
+        if (cadDemandasLoading) {
+            return console.log('ERRO: Não é possível executar esta ação durante o cadastro de nova demanda!');
+        }
+
         if (concluida == false) {
             console.log('Concluindo demanda...');
             
@@ -136,6 +148,10 @@ function Home() {
 
     // PERMITINDO EDIÇÃO DA DEMANDA
     function EditarDemanda(id, emAlteracao) {
+        if (cadDemandasLoading) {
+            return console.log('ERRO: Não é possível executar esta ação durante o cadastro de nova demanda!');
+        }
+
         if (emAlteracao == false) {
             console.log('Editando demanda...');
 
@@ -156,6 +172,10 @@ function Home() {
 
     // SALVANDO ALTERAÇÕES DA DEMANDA
     function SalvarAlteracoes(id) {
+        if (cadDemandasLoading) {
+            return console.log('ERRO: Não é possível executar esta ação durante o cadastro de nova demanda!');
+        }
+
         const confirmAlteracao= window.confirm('Tem certeza que deseja salvar as alterações?');
 
         if (!confirmAlteracao) {
@@ -178,6 +198,10 @@ function Home() {
 
     // EXCLUINDO A DEMANDA
     function ExcluirTask(id) {
+        if (cadDemandasLoading) {
+            return console.log('ERRO: Não é possível executar esta ação durante o cadastro de nova demanda!');
+        }
+        
         const confirmExclusao= window.confirm('Tem certeza que deseja excluir esta demanda?');
 
         if (!confirmExclusao) {
@@ -186,8 +210,14 @@ function Home() {
 
         console.log('Excluindo demanda...');
 
-        setDemandas((Demandas) => Demandas.filter((Demandas) => (Demandas.id !== id)));
-        console.log(`Demanda com o ID ${id} excluída com sucesso!`);
+        setDemandas((Demandas) => Demandas.map((Demandas) =>
+            Demandas.id == id ? {...Demandas, isDeleted: true} : Demandas
+        ));
+
+        setTimeout(() => {
+            setDemandas((Demandas) => Demandas.filter((Demandas) => (Demandas.id !== id)));
+            console.log(`Demanda com o ID ${id} excluída com sucesso!`);
+        }, 4000);
     }
 
     // COMPONENTE PARA MOSTRAR AS INFORMAÇÕES DA DEMANDA
@@ -288,8 +318,10 @@ function Home() {
                             {Demandas.map((Demandas) => (
 
                                 // PREVIEW DEMANDAS CADASTRADAS
-                                <div className={Demandas.inPreview ? 'ContainerPreviewDemandasAnimation' : 'ContainerPreviewDemandas'} key={Demandas.id}>
+                                <div className={Demandas.inPreview ? Demandas.isDeleted ? 'ContainerPreviewDemandasDeletedAnimation' : 'ContainerPreviewDemandasAnimation' : 'ContainerPreviewDemandas'} key={Demandas.id}>
+
                                     <div className='PreviewDemandas' style={{opacity: Demandas.isCompleted ? '0.8' : '1', backgroundColor: Demandas.isCompleted ? 'rgba(0, 255, 0, 0.171)' : 'initial', border: Demandas.emAlteracao ? '1px solid rgb(30, 104, 216, 0.623)' : '1px solid rgba(128, 128, 128, 0.185)', transition: '0.3s'}}>
+
                                         <div className='DemandaCadastrada'>
 
                                             {/* INFORMAÇÕES DA DEMANDA (QUE PODEM SER ALTERADAS CLICANDO NO BTN EDITAR) */}

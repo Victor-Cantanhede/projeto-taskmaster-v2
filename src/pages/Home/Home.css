@@ -158,19 +158,32 @@
 
     overflow: hidden;
     opacity: 0;
-    transition: 2s;
+    transition: 1s ease-in-out;
 }
 
 .ContainerPreviewDemandasAnimation {
     height: 900px;
     max-height: max-content;
     width: 100%;
-    max-width: 700px;
     padding: 10px;
 
     overflow: hidden;
     opacity: 1;
-    transition: 2s;
+    transition: 1s ease-in-out;
+}
+
+.ContainerPreviewDemandasDeletedAnimation {
+    height: 0px;
+    max-height: max-content;
+    width: 100%;
+    padding: 0 10px 0 10px;
+
+    overflow: hidden;
+    opacity: 0;
+
+    transform: translateX(100%);
+
+    transition: 0.5s ease-in-out;
 }
 
 .PreviewDemandas {
