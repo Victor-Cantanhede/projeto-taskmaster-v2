@@ -79,7 +79,7 @@ function Home() {
         setNewCad(true);
         setTimeout(() => {
             setNewCad(false);
-        }, 8000);
+        }, 4000);
 
         console.log('Cadastro realizado com sucesso!');
     }
@@ -92,7 +92,7 @@ function Home() {
             ));
     }
 
-    // CHAMANDO ANIMAÇÃO QUANDO NOVA DEMANDA É CADASTRADA
+    // CHAMANDO ANIMAÇÃO DE INCLUSÃO QUANDO NOVA DEMANDA É CADASTRADA
     useEffect(() => {
         Demandas.forEach((Demandas) => {
             if (!Demandas.inPreview) {
@@ -201,7 +201,7 @@ function Home() {
         if (cadDemandasLoading) {
             return console.log('ERRO: Não é possível executar esta ação durante o cadastro de nova demanda!');
         }
-        
+
         const confirmExclusao= window.confirm('Tem certeza que deseja excluir esta demanda?');
 
         if (!confirmExclusao) {
@@ -214,10 +214,13 @@ function Home() {
             Demandas.id == id ? {...Demandas, isDeleted: true} : Demandas
         ));
 
-        setTimeout(() => {
+        console.log(`Demanda com o ID ${id} excluída com sucesso!`);
+
+        /* TESTE DE EXCLUSÃO PERMANENTE */
+        /*setTimeout(() => {
             setDemandas((Demandas) => Demandas.filter((Demandas) => (Demandas.id !== id)));
             console.log(`Demanda com o ID ${id} excluída com sucesso!`);
-        }, 4000);
+        }, 4000);*/
     }
 
     // COMPONENTE PARA MOSTRAR AS INFORMAÇÕES DA DEMANDA

@@ -1,6 +1,15 @@
+import { useNavigate } from 'react-router-dom';
 import './SideMenu.css';
 
 function SideMenu() {
+
+    const navigate = useNavigate();
+
+    // REDIRECIONAMENTOS
+    function redirecionamentos(page) {
+        if (page == 'cad') { navigate('/Home') }
+        if (page == 'cons') { navigate('/Consulta') }
+    }
 
     return (
         <div className='SideMenuContainer'>
@@ -10,8 +19,8 @@ function SideMenu() {
                 </div>
                 <nav className='ContainerMenuOption'>
                     <ul>
-                        <li><span>Cadastro</span></li>
-                        <li><span>Consulta</span></li>
+                        <li onClick={() => redirecionamentos('cad')}><span>Cadastro</span></li>
+                        <li onClick={() => redirecionamentos('cons')}><span>Consulta</span></li>
                         <li><span>Relatório</span></li>
                         <li><span>Ajuda</span></li>
                     </ul>

@@ -276,7 +276,7 @@
 
 .check, .check * {
     margin: 0;
-    animation: out 8s ease-in-out forwards;
+    animation: out 3.5s ease-in-out forwards;
 }
 
 @keyframes out {

@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import FormLogin from './components/FormLogin/FormLogin';
 import Home from './pages/Home/Home';
+import Consulta from './pages/Consulta/Consulta';
 import './App.css';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           </div>
         } />
         <Route path="/Home" element={<Home />} />
+        <Route path="/Consulta" element={<Consulta />} />
       </Routes>
     </Router>
   )
