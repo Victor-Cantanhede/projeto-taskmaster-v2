@@ -81,3 +81,121 @@
         width: 100%;
     }
 }
+
+.ConsultaDemandaCadastrada {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(128, 128, 128, 0.185);
+}
+
+.InfoDemanda {
+    padding: 10px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+
+    color: rgba(0, 0, 0, 0.76);
+    text-shadow: none;
+}
+
+.InfoDemandaEdit {
+    padding: 10px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    gap: 10px;
+
+    color: rgba(0, 0, 0, 0.76);
+    text-shadow: none;
+}
+
+#btnVisualizar {
+    display: block;
+}
+
+.backContainerDetalharDemanda {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    
+    height: max-content;
+    height: 100dvh;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    background-color: rgba(0, 0, 0, 0.342);
+    animation: AbackContainerDetalharDemanda 0.3s ease-in-out forwards;
+}
+
+@keyframes AbackContainerDetalharDemanda {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+.ContainerDetalharDemanda {
+    height: 90%;
+    max-height: 800px;
+    width: 100%;
+    max-width: 600px;
+    padding: 10px;
+
+    position: relative;
+
+    overflow-y: auto;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.288);
+    animation: AContainerDetalharDemanda 0.6s ease-in-out forwards;
+}
+
+@keyframes AContainerDetalharDemanda {
+    0% {opacity: 0; transform: translateY(20px);}
+    50% {opacity: 0;}
+    75% {opacity: 0.5;}
+    100% {opacity: 1; transform: translateY(0);}
+}
+
+.ContainerIntDetalharDemanda{
+    height: 100%;
+    min-height: max-content;
+    padding: 20px;
+
+    border-radius: 10px;
+    border: 1px solid rgba(128, 128, 128, 0.185);
+    color: rgba(0, 0, 0, 0.76);
+    text-shadow: none;
+}
+
+#detalhesDescricao {
+    height: 74%;
+    margin-top: 5px;
+    padding: 10px;
+
+    border-radius: 10px;
+    border: 1px solid rgba(128, 128, 128, 0.185);
+    overflow-y: auto;
+}
+
+#closeDetalhesBtn {
+    height: 25px;
+    width: 25px;
+
+    display: block;
+    position: absolute;
+    right: 10px;
+
+    background-color: rgb(255, 0, 0);
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.26);
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+#closeDetalhesBtn:hover {
+    transform: translateY(-1px);
+}

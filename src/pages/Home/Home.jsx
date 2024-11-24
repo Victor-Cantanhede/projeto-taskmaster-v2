@@ -64,6 +64,7 @@ function Home() {
                 emAlteracao: false,
                 isCompleted: false,
                 inPreview: false,
+                detalhesNaTela: false,
                 isDeleted: false
             },
             ...Demandas

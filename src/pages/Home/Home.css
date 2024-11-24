@@ -221,6 +221,7 @@
     margin-top: 10px;
     display: flex;
     flex-flow: row nowrap;
+    justify-content: flex-end;
     gap: 10px;
 }
 
@@ -242,7 +243,7 @@
     font-size: 1em;
     color: white;
     text-shadow: 0 0 3px rgba(0, 0, 0, 0.774);
-    background-color: rgb(30, 104, 216, 0.623);
+    background-color: rgb(14, 55, 145);
     border-radius: 10px;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.37);
     cursor: pointer;
@@ -257,16 +258,27 @@
     }
 }
 
+.btnActionsDemanda button * {
+    transform: translateY(1px);
+}
+
 #btnConcluir {
+    display: block;
     background-color: rgb(0, 128, 0, 0.623);
 }
 
 #btnExcluir {
+    display: block;
     background-color: rgba(255, 0, 0, 0.623);
 }
 
 #btnSalvarAlteracoes {
+    display: block;
     background-color: rgb(255, 165, 0, 0.850);
+}
+
+#btnEditar {
+    display: block;
 }
 
 .btnActionsDemanda button:hover {

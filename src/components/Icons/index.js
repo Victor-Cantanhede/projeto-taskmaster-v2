@@ -5,3 +5,4 @@ export { default as CheckIco } from './CheckIco';
 export { default as DeleteIco } from './DeleteIco';
 export { default as DoneIco } from './DoneIco';
 export { default as SaveIco } from './SaveIco';
+export { default as EyeIco } from './EyeIco';
