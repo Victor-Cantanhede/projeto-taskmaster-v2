@@ -6,7 +6,38 @@
     color: white;
     background-color: rgba(7, 25, 65, 0.966);
     box-shadow: 1px 0 10px rgba(0, 0, 0, 0.616);
+    overflow: hidden;
     z-index: 9999;
+
+    transition: 0.4s;
+}
+
+.SideMenuContainer h1 {
+    width: 95px;
+    opacity: 1;
+    overflow: hidden;
+    transition: 0.4s;
+}
+
+.SideMenuContainerClosed {
+    min-height: 100%;
+    width: 65px;
+    padding: 10px;
+
+    color: white;
+    background-color: rgba(7, 25, 65, 0.966);
+    box-shadow: 1px 0 10px rgba(0, 0, 0, 0.616);
+    overflow: hidden;
+    z-index: 9999;
+
+    transition: 0.4s;
+}
+
+.SideMenuContainerClosed h1 {
+    width: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: 0.4s;
 }
 
 @media screen and (max-width: 1020px) {
@@ -47,10 +78,26 @@
     margin-top: 20px;
 }
 
+.ContainerMenuOptionClosed {
+    margin-top: 20px;
+}
+
 .ContainerMenuOption ul {
+    width: 100%;
     display: flex;
     flex-flow: column nowrap;
     gap: 20px;
+    overflow: hidden;
+    transition: 0.4s;
+}
+
+.ContainerMenuOptionClosed ul {
+    width: 0;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 20px;
+    overflow: hidden;
+    transition: 0.4s;
 }
 
 li {
@@ -70,12 +117,25 @@ li {
 }
 
 .ContainerMenuOption li {
+    width: 100%;
     padding: 10px;
     border-radius: 10px;
     border-bottom: 1px solid rgba(128, 128, 128, 0.185);
     cursor: pointer;
-
+    overflow: hidden;
+    opacity: 1;
     transition: 0.2s;
+}
+
+.ContainerMenuOptionClosed li.liClosed {
+    width: 0;
+    padding: 10px;
+    border-radius: 10px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.185);
+    cursor: pointer;
+    overflow: hidden;
+    opacity: 0;
+    transition: 0.4s;
 }
 
 .ContainerMenuOption li:hover {

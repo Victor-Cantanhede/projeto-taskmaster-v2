@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import SideMenu from '../../components/SideMenu/SideMenu';
-import { EditSquareIco, EyeIco, CheckIco, DoneIco, DeleteIco, ArchiveIco, SaveIco, CancelIco } from '../../components/Icons';
+import { EditSquareIco, EyeIco, CheckIco, DoneIco, ArchiveIco, SaveIco, CancelIco } from '../../components/Icons';
 import './Consulta.css';
 
 function Consulta() {
@@ -211,31 +211,32 @@ function Consulta() {
     function DetalharDemanda({Demandas}) {
 
         if (Demandas.detalhesNaTela) {
+
             return (
                 <div className='backContainerDetalharDemanda'>
                     <div className='ContainerDetalharDemanda'>
                         <button id='closeDetalhesBtn' onClick={() => OcultarDetalhes(Demandas.id)}><CancelIco /></button>
                         <div className='ContainerIntDetalharDemanda'>
-                            <p><strong>Título:</strong> {Demandas.titulo}</p>
-                            <p><strong>Categoria:</strong> {Demandas.categoria}</p>
-                            <p><strong>Data de Inclusão:</strong> {Demandas.dataInclusao}</p>
-                            <p><strong>Prazo:</strong> {Demandas.prazo} {Demandas.diasParaEntrega}</p>
+                            <InfDemandas Demandas={Demandas}/>
                             <p><strong>Descrição:</strong></p>
                             <div id='detalhesDescricao'>
                                 <p>{Demandas.descricao}</p>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             );
         }
     }
     
+    // INFORMAÇÕES DA DEMANDA
     function InfDemandas({Demandas}) {
 
         // HABILITANDO INPUTS PARA EDIÇÃO DA DEMANDA DENTRO DO PRÓPRIO ELEMENTO HTML
         // AS ALTERAÇÕES SÓ SERÃO PERMITIDAS CASO A FUNÇÃO "EditarDemanda" SEJA CHAMADA
         if (Demandas.emAlteracao == false) {
+
             return (
                 <div>
                     <p><strong>Título:</strong> {Demandas.titulo}</p>
